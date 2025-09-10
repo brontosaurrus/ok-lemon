@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>BakeLabel — PPDS labels & prep lists in 2 minutes</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Print PPDS-ready ingredient/allergen labels and a morning prep list for small bakeries, delis and market sellers.">
+  <style>
+    :root { --bg:#0b0c10; --card:#111317; --text:#e8ecf1; --muted:#a7b0bd; --brand:#6ee7b7; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, sans-serif; background:linear-gradient(180deg,#0b0c10, #0f1117); color:var(--text); }
+    .wrap { max-width:1100px; margin:0 auto; padding:40px 20px; }
+    header { display:flex; align-items:center; justify-content:space-between; gap:16px; }
+    .logo { font-weight:700; letter-spacing:.3px; display:flex; align-items:center; gap:10px; }
+    .badge { background:rgba(110,231,183,.15); color:var(--brand); padding:6px 10px; border-radius:999px; font-size:12px; }
+    .hero { display:grid; grid-template-columns:1.1fr .9fr; gap:32px; margin-top:40px; }
+    @media (max-width:900px){ .hero{ grid-template-columns:1fr; } }
+    .card { background:var(--card); border:1px solid rgba(255,255,255,.06); border-radius:16px; padding:24px; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+    h1 { font-size: clamp(28px, 4vw, 44px); margin:6px 0 10px; line-height:1.05; }
+    p.lead { color:var(--muted); font-size: clamp(16px, 2vw, 18px); margin:0 0 18px; }
+    ul { margin:0 0 18px 0; padding:0; list-style:none; }
+    li { display:flex; gap:10px; margin:10px 0; color:#cfd6df; }
+    .tick { font-weight:700; color:var(--brand); }
+    .cta { display:flex; gap:10px; margin-top:14px; }
+    input[type="email"]{ flex:1; padding:14px 16px; border-radius:12px; border:1px solid rgba(255,255,255,.1); background:#0c0f14; color:var(--text); outline:none; }
+    button{ padding:14px 18px; border:none; border-radius:12px; background:var(--brand); color:#0a0a0a; font-weight:700; cursor:pointer; }
+    .subtle { font-size:12px; color:#96a1b1; margin-top:8px; }
+    .shot { background:#0c0f14; border:1px dashed rgba(255,255,255,.1); border-radius:16px; height:420px; display:grid; place-items:center; color:#94a3b8; }
+    .trust { display:flex; gap:14px; flex-wrap:wrap; align-items:center; opacity:.85; font-size:12px; color:#9aa6b2; }
+    .footer { margin-top:40px; font-size:13px; color:#93a0b1; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo"><span>🥐</span> BakeLabel</div>
+      <span class="badge">UK PPDS-friendly</span>
+    </header>
+
+    <section class="hero">
+      <div class="card">
+        <h1>PPDS labels & prep lists—<br>ready in 2 minutes</h1>
+        <p class="lead">For bakeries, delis, and market sellers. Print ingredient/allergen labels that follow UK best practice, and send a morning prep list to WhatsApp or PDF.</p>
+        <ul>
+          <li><span class="tick">✓</span> <strong>Labels in seconds:</strong> product → ingredients auto-ordered → allergens emphasised → print queue.</li>
+          <li><span class="tick">✓</span> <strong>Prep list ritual:</strong> pick today’s items & quantities → clean checklist by station.</li>
+          <li><span class="tick">✓</span> <strong>Recipe costing:</strong> know your per-item cost to set prices confidently.</li>
+        </ul>
+        <form class="cta" method="POST" action="https://formspree.io/f/your-id">
+          <input type="email" name="email" placeholder="Work email" required>
+          <button type="submit">Start free</button>
+        </form>
+        <div class="subtle">No hardware lock-in. Works with common label printers. UK guidance links included in-app.</div>
+        <div class="trust" style="margin-top:16px">Founding offer: we’ll load your top 10 products and set up your printer for you.</div>
+      </div>
+
+      <div class="card">
+        <div class="shot">[Mock screenshot of Label preview + Print Queue]</div>
+        <div class="subtle" style="margin-top:10px">Screenshot placeholder — drop in a real shot after v1.</div>
+      </div>
+    </section>
+
+    <section class="footer">
+      <div>By using BakeLabel you remain responsible for your own compliance. We format info and surface allergens; we don’t certify labels.</div>
+    </section>
+  </div>
+</body>
+</html>
+

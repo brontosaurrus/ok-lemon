@@ -2,68 +2,225 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>BakeLabel — PPDS labels & prep lists in 2 minutes</title>
+  <title>OkLemon — PPDS labels & prep lists in 2 minutes</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="Print PPDS-ready ingredient/allergen labels and a morning prep list for small bakeries, delis and market sellers.">
+  <meta name="description" content="OkLemon helps bakeries, delis and market sellers print clear ingredient/allergen labels and send a morning prep list to WhatsApp or PDF. UK PPDS-friendly.">
+  <!-- Optional: hide from search while you test -->
+  <!-- <meta name="robots" content="noindex"> -->
+  <meta property="og:title" content="OkLemon — PPDS labels & prep lists in 2 minutes">
+  <meta property="og:description" content="Print ingredient/allergen labels. Send prep lists. Stay compliant and in flow.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://via.placeholder.com/1200x630.png?text=OkLemon">
+  <meta name="theme-color" content="#f6f9ff">
   <style>
-    :root { --bg:#0b0c10; --card:#111317; --text:#e8ecf1; --muted:#a7b0bd; --brand:#6ee7b7; }
-    * { box-sizing: border-box; }
-    body { margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, sans-serif; background:linear-gradient(180deg,#0b0c10, #0f1117); color:var(--text); }
-    .wrap { max-width:1100px; margin:0 auto; padding:40px 20px; }
-    header { display:flex; align-items:center; justify-content:space-between; gap:16px; }
-    .logo { font-weight:700; letter-spacing:.3px; display:flex; align-items:center; gap:10px; }
-    .badge { background:rgba(110,231,183,.15); color:var(--brand); padding:6px 10px; border-radius:999px; font-size:12px; }
-    .hero { display:grid; grid-template-columns:1.1fr .9fr; gap:32px; margin-top:40px; }
-    @media (max-width:900px){ .hero{ grid-template-columns:1fr; } }
-    .card { background:var(--card); border:1px solid rgba(255,255,255,.06); border-radius:16px; padding:24px; box-shadow: 0 10px 30px rgba(0,0,0,.25); }
-    h1 { font-size: clamp(28px, 4vw, 44px); margin:6px 0 10px; line-height:1.05; }
-    p.lead { color:var(--muted); font-size: clamp(16px, 2vw, 18px); margin:0 0 18px; }
-    ul { margin:0 0 18px 0; padding:0; list-style:none; }
-    li { display:flex; gap:10px; margin:10px 0; color:#cfd6df; }
-    .tick { font-weight:700; color:var(--brand); }
-    .cta { display:flex; gap:10px; margin-top:14px; }
-    input[type="email"]{ flex:1; padding:14px 16px; border-radius:12px; border:1px solid rgba(255,255,255,.1); background:#0c0f14; color:var(--text); outline:none; }
-    button{ padding:14px 18px; border:none; border-radius:12px; background:var(--brand); color:#0a0a0a; font-weight:700; cursor:pointer; }
-    .subtle { font-size:12px; color:#96a1b1; margin-top:8px; }
-    .shot { background:#0c0f14; border:1px dashed rgba(255,255,255,.1); border-radius:16px; height:420px; display:grid; place-items:center; color:#94a3b8; }
-    .trust { display:flex; gap:14px; flex-wrap:wrap; align-items:center; opacity:.85; font-size:12px; color:#9aa6b2; }
-    .footer { margin-top:40px; font-size:13px; color:#93a0b1; }
+    :root{
+      --bg:#0b0c10;
+      --panel:#111317;
+      --soft:#0c0f14;
+      --text:#e8ecf1;
+      --muted:#a7b0bd;
+      --brand:#FFD84D; /* lemon */
+      --brand-ink:#14120b;
+      --accent:#6ee7b7; /* mint accent */
+      --border:rgba(255,255,255,.08);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:linear-gradient(180deg,#0b0c10 0%,#10131a 100%);color:var(--text);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:1120px;margin:0 auto;padding:28px 16px 60px}
+    header{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;letter-spacing:.2px}
+    .lemon{width:28px;height:28px;border-radius:50%;background:var(--brand);display:grid;place-items:center;color:var(--brand-ink);box-shadow:0 6px 20px rgba(255,216,77,.25)}
+    nav{display:flex;gap:18px;font-size:14px;opacity:.9}
+    .badge{background:rgba(255,216,77,.15);color:var(--brand);padding:6px 10px;border-radius:999px;font-size:12px;border:1px solid rgba(255,216,77,.25)}
+    .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;margin-top:28px}
+    @media (max-width:940px){.hero{grid-template-columns:1fr}}
+    h1{margin:8px 0 12px;font-size:clamp(28px,4.2vw,46px);line-height:1.02}
+    p.lead{color:var(--muted);font-size:clamp(16px,2vw,18px);margin:0 0 16px}
+    .panel{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:22px;box-shadow:0 12px 36px rgba(0,0,0,.35)}
+    ul.clean{margin:0;padding:0;list-style:none}
+    ul.clean li{display:flex;gap:10px;margin:10px 0;color:#cfd6df}
+    .tick{font-weight:900;color:var(--accent)}
+    .cta{display:flex;gap:10px;margin-top:14px}
+    input[type=email],input[type=text]{flex:1;padding:14px 16px;border-radius:12px;border:1px solid var(--border);background:var(--soft);color:var(--text);outline:none}
+    button{padding:14px 18px;border:none;border-radius:12px;background:var(--brand);color:var(--brand-ink);font-weight:800;cursor:pointer}
+    .shot{background:var(--soft);border:1px dashed var(--border);border-radius:16px;height:420px;display:grid;place-items:center;color:#94a3b8}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    @media (max-width:900px){.grid{grid-template-columns:1fr}}
+    h2{font-size:clamp(22px,2.6vw,28px);margin:24px 0 8px}
+    .section{margin-top:36px}
+    .kicker{font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:#97a3b3;margin-bottom:6px}
+    .price{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+    @media (max-width:900px){.price{grid-template-columns:1fr}}
+    .card{background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:18px}
+    .card h3{margin:0 0 6px}
+    .small{font-size:12px;color:#97a3b3}
+    .footer{margin-top:40px;font-size:13px;color:#93a0b1}
+    .notice{background:rgba(110,231,183,.07);border:1px solid rgba(110,231,183,.2);padding:12px 14px;border-radius:12px;color:#d7ffef}
+    .list-dots{padding-left:18px;margin:8px 0;color:#cfd6df}
+    .list-dots li{margin:8px 0}
+    .pill{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid var(--border);border-radius:999px;background:var(--soft);color:#cfd6df;font-size:12px}
+    .center{display:flex;justify-content:center;align-items:center}
   </style>
 </head>
 <body>
   <div class="wrap">
     <header>
-      <div class="logo"><span>🥐</span> BakeLabel</div>
+      <div class="brand"><span class="lemon">🍋</span> OkLemon</div>
+      <nav>
+        <a href="#how">How it works</a>
+        <a href="#features">Features</a>
+        <a href="#printers">Printers</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#join">Start free</a>
+      </nav>
       <span class="badge">UK PPDS-friendly</span>
     </header>
 
-    <section class="hero">
-      <div class="card">
-        <h1>PPDS labels & prep lists—<br>ready in 2 minutes</h1>
-        <p class="lead">For bakeries, delis, and market sellers. Print ingredient/allergen labels that follow UK best practice, and send a morning prep list to WhatsApp or PDF.</p>
-        <ul>
-          <li><span class="tick">✓</span> <strong>Labels in seconds:</strong> product → ingredients auto-ordered → allergens emphasised → print queue.</li>
-          <li><span class="tick">✓</span> <strong>Prep list ritual:</strong> pick today’s items & quantities → clean checklist by station.</li>
-          <li><span class="tick">✓</span> <strong>Recipe costing:</strong> know your per-item cost to set prices confidently.</li>
-        </ul>
-        <form class="cta" method="POST" action="https://formspree.io/f/your-id">
-          <input type="email" name="email" placeholder="Work email" required>
-          <button type="submit">Start free</button>
-        </form>
-        <div class="subtle">No hardware lock-in. Works with common label printers. UK guidance links included in-app.</div>
-        <div class="trust" style="margin-top:16px">Founding offer: we’ll load your top 10 products and set up your printer for you.</div>
-      </div>
+    <main>
+      <section class="hero">
+        <div class="panel">
+          <h1>PPDS labels & prep lists — ready in 2 minutes</h1>
+          <p class="lead">For bakeries, delis, and market sellers. OkLemon prints clear ingredient/allergen labels and sends a tidy morning prep list to WhatsApp or PDF.</p>
+          <ul class="clean">
+            <li><span class="tick">✓</span><strong>Labels in seconds:</strong> product → ingredients auto-ordered → allergens emphasised → print queue.</li>
+            <li><span class="tick">✓</span><strong>Prep list ritual:</strong> pick today’s items & quantities → checklist by station.</li>
+            <li><span class="tick">✓</span><strong>Recipe costing:</strong> see per-item cost to price with confidence.</li>
+          </ul>
+          <div class="cta">
+            <a href="#join"><button>Start free</button></a>
+            <a href="#pricing" class="pill">Founding offer: we set up your top 10 products</a>
+          </div>
+          <p class="small" style="margin-top:10px">No hardware lock-in. Works with common label printers. You remain responsible for your own compliance.</p>
+        </div>
+        <div class="panel">
+          <div class="shot">Drop a real screenshot here (Label preview + Print Queue)</div>
+          <p class="small" style="margin-top:10px">This is a placeholder — replace once your v1 is live.</p>
+        </div>
+      </section>
 
-      <div class="card">
-        <div class="shot">[Mock screenshot of Label preview + Print Queue]</div>
-        <div class="subtle" style="margin-top:10px">Screenshot placeholder — drop in a real shot after v1.</div>
-      </div>
-    </section>
+      <section id="how" class="section">
+        <div class="kicker">How it works</div>
+        <h2>Today’s flow, start to finish</h2>
+        <div class="grid">
+          <div class="panel">
+            <h3>1) Add products & recipes</h3>
+            <p>Enter ingredients, quantities and supplier prices once. OkLemon auto-calculates per-item cost and keeps the ingredients list tidy.</p>
+          </div>
+          <div class="panel">
+            <h3>2) Generate labels</h3>
+            <p>Ingredients auto-ordered by weight with <em>the 14 major allergens</em> clearly emphasised. Add batch/date and send to the print queue.</p>
+          </div>
+          <div class="panel">
+            <h3>3) Send the prep list</h3>
+            <p>Select what you’re selling today and quantities. Share the checklist to WhatsApp or export a PDF for the team.</p>
+          </div>
+        </div>
+      </section>
 
-    <section class="footer">
-      <div>By using BakeLabel you remain responsible for your own compliance. We format info and surface allergens; we don’t certify labels.</div>
-    </section>
+      <section id="features" class="section">
+        <div class="kicker">What you get</div>
+        <h2>Built for small kitchens, not enterprise systems</h2>
+        <div class="grid">
+          <div class="panel"><h3>PPDS-friendly labels</h3><p>Templates designed for UK best practice. Clear wording, allergen emphasis, manual override when needed.</p></div>
+          <div class="panel"><h3>Lightning print queue</h3><p>Print multiple products in one go. Works great on a phone at the counter.</p></div>
+          <div class="panel"><h3>Recipe costing</h3><p>Import prices via CSV or paste. Spot margin issues early and adjust.</p></div>
+        </div>
+        <div class="grid" style="margin-top:16px">
+          <div class="panel"><h3>Prep by station</h3><p>Split lists by Hot / Cold / Pastry (customisable) so everyone knows what to do.</p></div>
+          <div class="panel"><h3>Multi-site (optional)</h3><p>Push a central menu to branches and keep labels consistent. Perfect for 3–20 site groups.</p></div>
+          <div class="panel"><h3>Done-for-you setup</h3><p>We’ll load your top 10 products and help connect the printer, so you’re ready this week.</p></div>
+        </div>
+      </section>
+
+      <section id="printers" class="section">
+        <div class="kicker">Hardware</div>
+        <h2>Printers we aim to support first</h2>
+        <div class="panel">
+          <ul class="list-dots">
+            <li>Brother & DYMO desktop label printers (USB/Bluetooth) with common roll sizes.</li>
+            <li>44–62mm labels for ingredients/allergens; 25–32mm for small tickets.</li>
+            <li>Simple setup guides and a tested label size per model (we’ll publish compatibility as we go).</li>
+          </ul>
+          <p class="small">Have a specific model? Tell us in the form below and we’ll prioritise testing.</p>
+        </div>
+      </section>
+
+      <section id="pricing" class="section">
+        <div class="kicker">Pricing</div>
+        <h2>Simple plans that match your size</h2>
+        <div class="price">
+          <div class="card">
+            <h3>Starter — £29/mo</h3>
+            <p>Up to 30 products, 1 printer, prep list to WhatsApp/PDF.</p>
+          </div>
+          <div class="card">
+            <h3>Pro — £59/mo</h3>
+            <p>Unlimited products, print queue, recipe costing, multi-printer.</p>
+          </div>
+          <div class="card">
+            <h3>Multi-site — £99/site/mo</h3>
+            <p>Central menu sync & simple reporting. Perfect for 3–20 site groups.</p>
+          </div>
+        </div>
+        <p class="small" style="margin-top:10px">Optional: Done-for-you setup £199. Founding customers can access a one-off lifetime deal — ask below.</p>
+      </section>
+
+      <section id="join" class="section">
+        <div class="kicker">Get early access</div>
+        <h2>Start free — we’ll set up your first 10 products</h2>
+        <div class="panel">
+          <form class="cta" method="POST" action="https://formspree.io/f/your-id">
+            <input type="email" name="email" placeholder="Work email" required>
+            <input type="text" name="business" placeholder="Business name (optional)">
+            <button type="submit">Request invite</button>
+          </form>
+          <p class="small" style="margin-top:8px">Prefer email? <a href="mailto:hello@oklemon.co">hello@oklemon.co</a></p>
+          <div class="notice" style="margin-top:12px">
+            Heads-up: OkLemon formats information and highlights allergens; we don’t certify legal compliance. We link to UK guidance in-app.
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="kicker">FAQ</div>
+        <h2>Quick answers</h2>
+        <div class="grid">
+          <div class="panel">
+            <h3>Do I need labels for everything?</h3>
+            <p>Only items prepacked on your premises before a customer orders (PPDS) need full ingredients with allergens emphasised. For loose items, you must still provide allergen info (e.g., shelf tickets/menu).</p>
+          </div>
+          <div class="panel">
+            <h3>Will my printer work?</h3>
+            <p>We’re starting with popular Brother/DYMO models. Tell us your model in the form and we’ll confirm.</p>
+          </div>
+          <div class="panel">
+            <h3>Can you load my recipes?</h3>
+            <p>Yes — founding customers get white-glove onboarding. Send your top 10 products and supplier prices; we’ll handle the rest.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="center" style="gap:10px">
+        <span class="lemon">🍋</span> <span>OkLemon • © <span id="y"></span> • <a href="mailto:hello@oklemon.co">Contact</a></span>
+      </div>
+    </footer>
   </div>
+
+  <script>
+    // auto year
+    document.getElementById('y').textContent = new Date().getFullYear();
+    // smooth scroll (optional)
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        const id=a.getAttribute('href').slice(1);
+        const target=document.getElementById(id);
+        if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth',block:'start'}); }
+      });
+    });
+  </script>
 </body>
 </html>
 
